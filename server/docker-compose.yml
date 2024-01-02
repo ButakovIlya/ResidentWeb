@@ -1,31 +1,40 @@
-version: '3'
+# docker-compose.yml
+
+version: "3.8"
 
 services:
-  django:
-    build: .
+  app:
+    build:
+      context: .
+    restart: always
     volumes:
-      - .:/django
-    ports:
-      - '8000:8000'
+      - static-data:/vol/static
+      - media-data:/vol/media
     depends_on:
       - db
+
+  proxy:
+    build:
+      context: ./proxy
+    restart: always
+    volumes:
+      - static-data:/vol/static
+      - media-data:/vol/media
+    ports:
+      - 80:80
+    depends_on:
+      - app
 
   db:
     image: mysql:latest
     ports:
-      - "3306:3306"
-    env_file:
-      - .env
+      - '3306:3306'
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: 'root'  
+      MYSQL_DATABASE: 'resident_web_db'
+      MYSQL_PASSWORD: root 
 
-  nginx:
-    image: nginx:latest
-    ports:
-      - '80:80'
-    depends_on:
-      - django
-
-
-
+volumes:
+  static-data:
+  media-data:

@@ -34,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 # DEBUG = env('DEBUG')
 
 INSTALLED_APPS = [
@@ -93,11 +93,11 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
+        'ENGINE': 'mysql.connector.django',
         'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'db',
         'PORT': '3306',
 	'OPTIONS': {
             'charset': 'utf8mb4',
@@ -137,9 +137,14 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
+STATIC_URL = "static/"   # e.g. localhost:80/static/styles.css
+MEDIA_URL = "media/"     # e.g. localhost:80/media/image.jpg
 
+# directory where all static files of the app are going to be put
+STATIC_ROOT = "/vol/static"
+
+# directory where all files uploaded by users(media files) are going to be put
+MEDIA_ROOT = "/vol/media"
 
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

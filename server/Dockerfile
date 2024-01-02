@@ -1,15 +1,15 @@
-FROM python:3
+# Dockerfile 
+
+FROM python:3.11.5-slim-bullseye
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
-WORKDIR /django
+WORKDIR /app
 
-COPY ./ /django/
-
-ENV DJANGO_SUPERUSER_PASSWORD yes
-
+COPY . /app/
+COPY ./requirements.txt /app/
 
 RUN pip install -r requirements.txt
 
-RUN python manage.py collectstatic
+ENTRYPOINT [ "sh", "-c", "./scripts/start.sh" ]
