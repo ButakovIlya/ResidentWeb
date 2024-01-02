@@ -9,10 +9,13 @@ class AdminApi {
 
   private async request(endpoint: string, method: string, body?: any) {
     try {
+      const csrfToken =
+        (document.cookie.match(/csrftoken=(.+)/) || [])[1] || "";
       const response = await fetch(`${this.baseUrl}/${endpoint}`, {
         method,
         headers: {
           "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
         },
         body: JSON.stringify(body),
       });

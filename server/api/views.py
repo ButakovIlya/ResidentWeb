@@ -1,14 +1,20 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import AllowAny
 from django.core.mail import send_mail
 from .models import *
+from django.views.decorators.csrf import csrf_exempt
 
 import logging
 logger = logging.getLogger('api') 
 
-
+@csrf_exempt
 @api_view(['POST'])
+@authentication_classes([SessionAuthentication])
+@permission_classes([AllowAny])
 def create_user(request):
     data = request.data
     try:
@@ -37,7 +43,7 @@ def contact_mail_request(request, new_user:ContactUser) -> True:
         subject = f'Заявка на обратную связь от "{new_user.fio}"'
         message = f"Телефон: {new_user.phone}\nПочта: {new_user.email}\nТип запроса: {new_user.requestType}\n\nСообщение: {new_user.message}\n"
         from_email = 'theroflx@yandex.ru'
-        recipient_list = ['residentdom@yandex.ru']
+        recipient_list = ['theroflx@yandex.ru']
         send_mail(subject, message, from_email, recipient_list)
         return True
     
