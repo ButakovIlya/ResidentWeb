@@ -4,8 +4,8 @@ from rest_framework import status
 from django.core.mail import send_mail
 from .models import *
 
-# import logging
-# logger = logging.getLogger('api') 
+import logging
+logger = logging.getLogger('api') 
 
 
 @api_view(['POST'])

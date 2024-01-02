@@ -72,6 +72,46 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'settings.urls'
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'file_format': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'console_format': {
+            'format': '{asctime} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+            'formatter': 'file_format',  
+            'encoding': 'utf-8',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'console_format',  
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],  
+            'level': 'INFO',
+        },
+        'api': {
+            'handlers': ['file'],  
+            'level': 'DEBUG',
+        },
+    }
+
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -146,6 +186,9 @@ STATIC_ROOT = "/vol/static"
 # directory where all files uploaded by users(media files) are going to be put
 MEDIA_ROOT = "/vol/media"
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  
+]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
