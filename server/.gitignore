@@ -1,0 +1,5 @@
+debug.log
+media
+venv
+.env
+settings/.env
