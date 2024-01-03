@@ -43,7 +43,7 @@ def contact_mail_request(request, new_user:ContactUser) -> True:
         subject = f'Заявка на обратную связь от "{new_user.fio}"'
         message = f"Телефон: {new_user.phone}\nПочта: {new_user.email}\nТип запроса: {new_user.requestType}\n\nСообщение: {new_user.message}\n"
         from_email = 'theroflx@yandex.ru'
-        recipient_list = ['theroflx@yandex.ru']
+        recipient_list = ['residentdom@mail.ru']
         send_mail(subject, message, from_email, recipient_list)
         return True
     
