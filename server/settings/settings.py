@@ -133,19 +133,10 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
-        'NAME': env('DB_NAME'),
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'db',
-        'PORT': '3306',
-	'OPTIONS': {
-            'charset': 'utf8mb4',
-            'init_command': 'SET collation_connection = utf8mb4_unicode_ci',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -195,3 +186,24 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+ALLOWED_HOSTS = ['residentweb.com', 'www.residentweb.com']
+
+SECURE_SSL_REDIRECT = True  # Включает автоматическое перенаправление HTTP на HTTPS
+SECURE_BROWSER_XSS_FILTER = True  # Включает фильтрацию XSS в браузере
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Включает защиту от MIME-типов, указанных сервером
+SESSION_COOKIE_SECURE = True  # Устанавливает флаг Secure для куки сессии
+CSRF_COOKIE_SECURE = True  # Устанавливает флаг Secure для CSRF-куки
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CORS_ALLOWED_ORIGINS = [
+    "https://your_domain.com",
+    "https://www.your_domain.com",
+]
+
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
+USE_X_FORWARDED_PROTO = True
+

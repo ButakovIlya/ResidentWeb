@@ -1,8 +1,9 @@
 # proxy/default.conf.tpl
 
 server {
-    listen ${LISTEN_PORT};
-
+    listen 443 ssl;
+    ssl_certificate     /etc/nginx/ssl/server.crt;
+    ssl_certificate_key /etc/nginx/ssl/server.key;
     client_max_body_size 100M; 
 
     location /static {
