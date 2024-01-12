@@ -188,22 +188,25 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-ALLOWED_HOSTS = ['residentweb.com', 'www.residentweb.com']
+# ALLOWED_HOSTS = ['residentweb.com', 'www.residentweb.com']
 
-SECURE_SSL_REDIRECT = True  # Включает автоматическое перенаправление HTTP на HTTPS
-SECURE_BROWSER_XSS_FILTER = True  # Включает фильтрацию XSS в браузере
-SECURE_CONTENT_TYPE_NOSNIFF = True  # Включает защиту от MIME-типов, указанных сервером
-SESSION_COOKIE_SECURE = True  # Устанавливает флаг Secure для куки сессии
-CSRF_COOKIE_SECURE = True  # Устанавливает флаг Secure для CSRF-куки
+# SECURE_SSL_REDIRECT = True  # Включает автоматическое перенаправление HTTP на HTTPS
+# SECURE_BROWSER_XSS_FILTER = True  # Включает фильтрацию XSS в браузере
+# SECURE_CONTENT_TYPE_NOSNIFF = True  # Включает защиту от MIME-типов, указанных сервером
+# SESSION_COOKIE_SECURE = True  # Устанавливает флаг Secure для куки сессии
+# CSRF_COOKIE_SECURE = True  # Устанавливает флаг Secure для CSRF-куки
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CORS_ALLOWED_ORIGINS = [
-    "https://your_domain.com",
-    "https://www.your_domain.com",
+    "https://residentweb.ru",
+    "https://www.residentweb.com",
+    "http://residentweb.ru",
+    "http://www.residentweb.com",
 ]
-
-USE_X_FORWARDED_HOST = True
-USE_X_FORWARDED_PORT = True
-USE_X_FORWARDED_PROTO = True
+ALLOWED_HOSTS = ['residentweb.ru']
+CSRF_TRUSTED_ORIGINS = ['https://residentweb.ru']
+# USE_X_FORWARDED_HOST = True
+# USE_X_FORWARDED_PORT = True
+# USE_X_FORWARDED_PROTO = True
 

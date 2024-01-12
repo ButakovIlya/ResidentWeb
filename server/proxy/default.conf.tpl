@@ -1,11 +1,16 @@
 # proxy/default.conf.tpl
 
 server {
-    listen 443 ssl;
-    ssl_certificate     /etc/nginx/ssl/server.crt;
-    ssl_certificate_key /etc/nginx/ssl/server.key;
-    client_max_body_size 100M; 
 
+    listen 443 ssl;
+    listen 80;
+    
+    server_name residentweb.ru;
+    
+    ssl_certificate /etc/ssl/residentweb.crt;
+    ssl_certificate_key /etc/ssl/residentweb.key;
+
+        
     location /static {
         alias /vol/static;
     }
